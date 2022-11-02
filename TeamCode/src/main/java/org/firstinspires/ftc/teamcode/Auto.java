@@ -48,9 +48,10 @@ public class Auto extends OpMode {
                // .build();
 
         // move right
-        frontLMotor.setPower(1);
-        frontRMotor.setPower(-1);
-        leftMotor.setPower(-1);
-        rightMotor.setPower(1);
+        double X = 0.5;
+        frontLMotor.setPower(X);
+        frontRMotor.setPower(-X);
+        leftMotor.setPower(-X);
+        rightMotor.setPower(X);
     }
 }

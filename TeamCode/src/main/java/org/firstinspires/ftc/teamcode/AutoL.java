@@ -47,11 +47,12 @@ public class AutoL extends OpMode {
         //.splineTo(new Vector2d(4.67, 46.83), Math.toRadians(270.00))
         // .build();
 
+        double X = 0.5;
         // move right
-        frontLMotor.setPower(-1);
-        frontRMotor.setPower(1);
-        leftMotor.setPower(1);
-        rightMotor.setPower(-1);
+        frontLMotor.setPower(-X);
+        frontRMotor.setPower(X);
+        leftMotor.setPower(X);
+        rightMotor.setPower(-X);
     }
 }
 
