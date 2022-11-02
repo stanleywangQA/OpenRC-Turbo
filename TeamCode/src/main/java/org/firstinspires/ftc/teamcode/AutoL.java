@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 //import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Autonomous
-public class Auto extends OpMode {
+public class AutoL extends OpMode {
 
     DcMotor leftMotor = null;
     DcMotor rightMotor = null;
@@ -40,17 +40,18 @@ public class Auto extends OpMode {
     @Override
     public void loop() {
         //Roadrunner code
-       // Trajectory untitled0 = drive.trajectoryBuilder(new Pose2d(-42.17, 59.50, Math.toRadians(6.01)))
-                //.splineTo(new Vector2d(19.00, 46.67), Math.toRadians(223.73))
-               // .splineTo(new Vector2d(-50.67, 28.50), Math.toRadians(39.77))
-               // .splineTo(new Vector2d(0.33, 50.17), Math.toRadians(-36.03))
-                //.splineTo(new Vector2d(4.67, 46.83), Math.toRadians(270.00))
-               // .build();
+        // Trajectory untitled0 = drive.trajectoryBuilder(new Pose2d(-42.17, 59.50, Math.toRadians(6.01)))
+        //.splineTo(new Vector2d(19.00, 46.67), Math.toRadians(223.73))
+        // .splineTo(new Vector2d(-50.67, 28.50), Math.toRadians(39.77))
+        // .splineTo(new Vector2d(0.33, 50.17), Math.toRadians(-36.03))
+        //.splineTo(new Vector2d(4.67, 46.83), Math.toRadians(270.00))
+        // .build();
 
         // move right
-        frontLMotor.setPower(1);
-        frontRMotor.setPower(-1);
-        leftMotor.setPower(-1);
-        rightMotor.setPower(1);
+        frontLMotor.setPower(-1);
+        frontRMotor.setPower(1);
+        leftMotor.setPower(1);
+        rightMotor.setPower(-1);
     }
 }
+
