@@ -8,12 +8,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp()
 public class RobotArm extends OpMode{
 
-    Servo claw = null;
-    DcMotor roboArm = null;
+    Servo clawRot;
+    Servo claw;
+    //DcMotor roboArm = null;
 
     public void init() {
-        claw = hardwareMap.get(Servo.class, "Servo");
-        roboArm = hardwareMap.get(DcMotor.class, "Motor");
+        clawRot = hardwareMap.get(Servo.class, "Servo");
+        claw = hardwareMap.get(Servo.class, "Servo2");
+        //roboArm = hardwareMap.get(DcMotor.class, "Motor");
     }
 
 
@@ -27,13 +29,17 @@ public class RobotArm extends OpMode{
 
         //}
 
-        if (gamepad2.right_bumper) {
-             claw.setDirection(Servo.Direction.FORWARD);
-        }
-        if (gamepad2.left_bumper) {
-            claw.setDirection(Servo.Direction.REVERSE);
-        }
-        roboArm.setPower(gamepad2.left_stick_y);
+
+            clawRot.setPosition(gamepad2.right_stick_y* 2);
+            telemetry.addData("action:","rightstick, claw rotation");
+            if (gamepad2.right_bumper) {
+                clawRot.setPosition(-2);
+                telemetry.addData("action:", "right key, reverse rotation");
+            }
+
+            claw.setPosition(gamepad2.right_stick_x);
+
+        //roboArm.setPower(gamepad2.left_stick_y);
 
     }
 }

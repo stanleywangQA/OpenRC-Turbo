@@ -16,8 +16,8 @@ public class Sample2WheelDrive extends OpMode {
 
     public void init() {
         // passings hardware setups to the motors
-        leftMotor = hardwareMap.get(DcMotor.class, "left_drive");
-        rightMotor = hardwareMap.get(DcMotor.class, "right_drive");
+        leftMotor = hardwareMap.get(DcMotor.class, "backL");
+        rightMotor = hardwareMap.get(DcMotor.class, "backR");
 
         frontLMotor = hardwareMap.get(DcMotor.class, "frontL");
         frontRMotor = hardwareMap.get(DcMotor.class, "frontR");
