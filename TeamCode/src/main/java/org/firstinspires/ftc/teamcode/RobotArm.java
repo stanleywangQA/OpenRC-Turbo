@@ -21,7 +21,7 @@ public class RobotArm extends OpMode{
     DcMotor frontRMotor = null;
 
     //https://github.com/FTCLib/FTCLib
-
+    //https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Java-Sample-Op-Mode-for-TensorFlow-Object-Detection
     public void init() {
         clawRot = hardwareMap.get(Servo.class, "Servo");
         claw = hardwareMap.get(Servo.class, "Servo2");
