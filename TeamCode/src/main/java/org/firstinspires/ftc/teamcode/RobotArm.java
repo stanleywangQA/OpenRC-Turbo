@@ -23,10 +23,10 @@ public class RobotArm extends OpMode{
     //https://github.com/FTCLib/FTCLib
     //https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Java-Sample-Op-Mode-for-TensorFlow-Object-Detection
     public void init() {
-        clawRot = hardwareMap.get(Servo.class, "Servo");
-        claw = hardwareMap.get(Servo.class, "Servo2");
-        roboArm = hardwareMap.get(DcMotorEx.class, "Motor");
-        roboArmUp = hardwareMap.get(DcMotorEx.class, "Motor2");
+       // clawRot = hardwareMap.get(Servo.class, "Servo");
+        //claw = hardwareMap.get(Servo.class, "Servo2");
+        //roboArm = hardwareMap.get(DcMotorEx.class, "Motor");
+        //roboArmUp = hardwareMap.get(DcMotorEx.class, "Motor2");
 
         leftMotor = hardwareMap.get(DcMotor.class, "backL");
         rightMotor = hardwareMap.get(DcMotor.class, "backR");
@@ -45,7 +45,7 @@ public class RobotArm extends OpMode{
         //} else if (claw.getDirection() == Servo.Direction.REVERSE) {
 
         //}
-
+        /*
             double RotPos = 1;
             int speedMod = 2;
 
@@ -80,7 +80,7 @@ public class RobotArm extends OpMode{
 
             roboArmUp.setPower(gamepad2.right_stick_y/speedMod);
             roboArmUp.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-
+            */
 
             // Drive --------------------------------------------------------------------
             // assign speed modifier
@@ -98,14 +98,14 @@ public class RobotArm extends OpMode{
             double r = Math.hypot(gamepad1.left_stick_x, gamepad1.right_stick_x);
             double robotAngle = Math.atan2(- 1 * gamepad1.right_stick_x, gamepad1.left_stick_x) - Math.PI / 4;
             double rightX = gamepad1.left_stick_y;
-            final double v1 = r * Math.cos(robotAngle) + rightX;
-            final double v2 = r * Math.sin(robotAngle) - rightX;
-            final double v3 = r * Math.sin(robotAngle) + rightX;
-            final double v4 = r * Math.cos(robotAngle) - rightX;
+            final double v1 = r * Math.cos(-robotAngle) + rightX; //back left
+            final double v2 = r * Math.sin(robotAngle) - rightX; //front right
+            final double v3 = r * Math.sin(robotAngle) + rightX; //front left
+            final double v4 = r * Math.cos(-robotAngle) - rightX; //back right
 
-            frontLMotor.setPower(v1 / speedModB);
+            frontLMotor.setPower(v3 / speedModB);
             frontRMotor.setPower(v2 / speedModB);
-            leftMotor.setPower(v3 / speedModB);
+            leftMotor.setPower(v1 / speedModB);
             rightMotor.setPower(v4 / speedModB);
     }
 }
