@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 //import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
+//Use apriltag (image scanner, not neural network)
 @Autonomous
 public class Auto extends OpMode {
 

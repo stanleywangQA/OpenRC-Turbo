@@ -20,6 +20,9 @@ public class RobotArm extends OpMode{
     DcMotor frontLMotor = null;
     DcMotor frontRMotor = null;
 
+    DcMotor ArmMotor = null;
+    float RoboArmNum = 0;
+
     //https://github.com/FTCLib/FTCLib
     //https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Java-Sample-Op-Mode-for-TensorFlow-Object-Detection
     public void init() {
@@ -33,6 +36,15 @@ public class RobotArm extends OpMode{
 
         frontLMotor = hardwareMap.get(DcMotor.class, "frontL");
         frontRMotor = hardwareMap.get(DcMotor.class, "frontR");
+
+
+        ArmMotor = hardwareMap.get(DcMotor.class, "Arm");
+
+        ArmMotor.setTargetPosition(0);
+        //Resetting motor encoders
+        ArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //setting motor mode
+        ArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
 
@@ -82,7 +94,17 @@ public class RobotArm extends OpMode{
             roboArmUp.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
             */
 
-            // Drive --------------------------------------------------------------------
+            // negative because motor is reversed
+            RoboArmNum -= gamepad2.right_stick_y * 4;
+            // min, max values
+            RoboArmNum = Math.min(900, RoboArmNum);
+            RoboArmNum = Math.max(0, RoboArmNum);
+
+            // set power, position
+            ArmMotor.setPower(1);
+            ArmMotor.setTargetPosition((int)RoboArmNum);
+
+        // Drive --------------------------------------------------------------------
             // assign speed modifier
             int speedModB = 2;
 
