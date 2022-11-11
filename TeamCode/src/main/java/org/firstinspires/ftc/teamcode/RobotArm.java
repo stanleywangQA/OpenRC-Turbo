@@ -103,6 +103,7 @@ public class RobotArm extends OpMode{
             // set power, position
             ArmMotor.setPower(1);
             ArmMotor.setTargetPosition((int)RoboArmNum);
+            telemetry.addData("Motor position: ", RoboArmNum);
 
         // Drive --------------------------------------------------------------------
             // assign speed modifier
