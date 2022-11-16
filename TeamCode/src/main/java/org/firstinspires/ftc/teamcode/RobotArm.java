@@ -2,17 +2,22 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.openftc.apriltag.AprilTagDetection;
+import org.openftc.easyopencv.OpenCvCamera;
+
 @TeleOp()
 public class RobotArm extends OpMode{
 
+    //CRServo clawRot;
     Servo clawRot;
     Servo claw;
-    DcMotor roboArm = null;
-    DcMotor roboArmUp = null;
+    //DcMotor roboArm = null;
+    //DcMotor roboArmUp = null;
 
     DcMotor leftMotor = null;
     DcMotor rightMotor = null;
@@ -23,13 +28,42 @@ public class RobotArm extends OpMode{
     DcMotor ArmMotor = null;
     float RoboArmNum = 0;
 
+
+    //INTRODUCE VARIABLES HERE
+
+    OpenCvCamera camera;
+    AprilTagDetectionPipeline aprilTagDetectionPipeline;
+
+    static final double FEET_PER_METER = 3.28084;
+
+    // Lens intrinsics
+    // UNITS ARE PIXELS
+    // NOTE: this calibration is for the C920 webcam at 800x448.
+    // You will need to do your own calibration for other configurations!
+    double fx = 578.272;
+    double fy = 578.272;
+    double cx = 402.145;
+    double cy = 221.506;
+
+    // UNITS ARE METERS
+    double tagsize = 0.166;
+
+    // Tag ID 1,2,3 from the 36h11 family
+    /*EDIT IF NEEDED!!!*/
+
+    int LEFT = 1;
+    int MIDDLE = 2;
+    int RIGHT = 3;
+
+    AprilTagDetection tagOfInterest = null;
+
     //https://github.com/FTCLib/FTCLib
     //https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Java-Sample-Op-Mode-for-TensorFlow-Object-Detection
     public void init() {
-       // clawRot = hardwareMap.get(Servo.class, "Servo");
-        //claw = hardwareMap.get(Servo.class, "Servo2");
-        //roboArm = hardwareMap.get(DcMotorEx.class, "Motor");
-        //roboArmUp = hardwareMap.get(DcMotorEx.class, "Motor2");
+        //clawRot = hardwareMap.get(CRServo.class, "Servo");
+        clawRot = hardwareMap.get(Servo.class, "Servo");
+        claw = hardwareMap.get(Servo.class, "Servo2");
+
 
         leftMotor = hardwareMap.get(DcMotor.class, "backL");
         rightMotor = hardwareMap.get(DcMotor.class, "backR");
@@ -57,7 +91,7 @@ public class RobotArm extends OpMode{
         //} else if (claw.getDirection() == Servo.Direction.REVERSE) {
 
         //}
-        /*
+
             double RotPos = 1;
             int speedMod = 2;
 
@@ -82,6 +116,7 @@ public class RobotArm extends OpMode{
                 telemetry.addData("action:", "claw close");
             }
 
+            /* Previous code
             //Robot arm
             if (gamepad2.right_bumper) {
                 speedMod = 1;

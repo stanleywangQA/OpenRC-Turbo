@@ -6,10 +6,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-//import com.acmerobotics.roadrunner.geometry.Pose2d;
 
-//import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 //Use apriltag (image scanner, not neural network)
 @Autonomous
