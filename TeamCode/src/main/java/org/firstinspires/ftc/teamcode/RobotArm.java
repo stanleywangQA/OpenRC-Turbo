@@ -28,6 +28,8 @@ public class RobotArm extends OpMode{
     DcMotor ArmMotor = null;
     float RoboArmNum = 0;
 
+    boolean closed = true;
+
 
     //INTRODUCE VARIABLES HERE
 
@@ -139,6 +141,17 @@ public class RobotArm extends OpMode{
             ArmMotor.setPower(1);
             ArmMotor.setTargetPosition((int)RoboArmNum);
             telemetry.addData("Motor position: ", RoboArmNum);
+
+            if(gamepad2.a) {
+                if(!closed) {
+                    claw.setPosition(-1);
+                    closed = true;
+                } else if (closed) {
+                    claw.setPosition(1);
+                    closed = false;
+                }
+            }
+
 
         // Drive --------------------------------------------------------------------
             // assign speed modifier
