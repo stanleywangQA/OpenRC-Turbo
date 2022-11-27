@@ -28,8 +28,6 @@ public class RobotArm extends OpMode{
     DcMotor ArmMotor = null;
     float RoboArmNum = 0;
 
-    boolean closed = true;
-
 
     //INTRODUCE VARIABLES HERE
 
@@ -76,11 +74,13 @@ public class RobotArm extends OpMode{
 
         ArmMotor = hardwareMap.get(DcMotor.class, "Arm");
 
+
         ArmMotor.setTargetPosition(0);
         //Resetting motor encoders
         ArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //setting motor mode
         ArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
     }
 
 
@@ -110,6 +110,7 @@ public class RobotArm extends OpMode{
 
 
             // Clwa open / close
+        /*
             if (gamepad2.left_trigger != 0) {
                 claw.setPosition(1);
                 telemetry.addData("action:", "claw open");
@@ -117,6 +118,8 @@ public class RobotArm extends OpMode{
                 claw.setPosition(-1);
                 telemetry.addData("action:", "claw close");
             }
+
+         */
 
             /* Previous code
             //Robot arm
@@ -137,20 +140,28 @@ public class RobotArm extends OpMode{
             RoboArmNum = Math.min(900, RoboArmNum);
             RoboArmNum = Math.max(0, RoboArmNum);
 
+            if (gamepad2.left_bumper) {
+                RoboArmNum = 900;
+            } else if (gamepad2.right_bumper) {
+                RoboArmNum = 0;
+            }
+
             // set power, position
             ArmMotor.setPower(1);
             ArmMotor.setTargetPosition((int)RoboArmNum);
             telemetry.addData("Motor position: ", RoboArmNum);
 
-            if(gamepad2.a) {
-                if(!closed) {
-                    claw.setPosition(-1);
-                    closed = true;
-                } else if (closed) {
-                    claw.setPosition(1);
-                    closed = false;
+
+                if(gamepad2.a) {
+                    //open
+                    claw.setPosition(0.05);
+                    telemetry.addData("Claw servo set position:", "-0.25");
+                } else if (gamepad2.b) {
+                    claw.setPosition(0.3);
+                    telemetry.addData("Claw servo set position:", "0.35");
                 }
-            }
+                telemetry.update();
+
 
 
         // Drive --------------------------------------------------------------------
